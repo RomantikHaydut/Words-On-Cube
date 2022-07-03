@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LetterControl : MonoBehaviour
 {
@@ -8,10 +9,21 @@ public class LetterControl : MonoBehaviour
     private bool selected;
     Vector3 goalPoint;
     Vector3 direction;
+    TextMeshProUGUI letterText;
+    
     void Start()
     {
         selected = false;
-        goalPoint = new Vector3(0, 2, -2);
+        goalPoint = new Vector3(0, 3, -2);
+        GameObject[] tagSiblings= GameObject.FindGameObjectsWithTag(gameObject.tag);
+        for (int i = 0; i < tagSiblings.Length; i++)
+        {
+            if (tagSiblings[i].gameObject!=gameObject)
+            {
+                letterText = tagSiblings[i].GetComponent<TextMeshProUGUI>();
+
+            }
+        }
     }
 
     
@@ -66,12 +78,20 @@ public class LetterControl : MonoBehaviour
             }
             else if((timer<=2 && timer>=0) && distanceFromGoal<0.2f)
             {
-                transform.Rotate(Vector3.up * 90 * Time.deltaTime);
+                transform.Rotate(Vector3.up * 180 * Time.deltaTime);
                 timer -= Time.deltaTime;
             }
             else if (timer<0 && timer>=-1f)
             {
                 renderer.material.color = Color.red;
+                timer -= Time.deltaTime;
+            }
+            else if (timer<-1f)
+            {
+                //letterText.CrossFadeColor(Color.red, 1f, true, true);
+                letterText.color = Color.red;
+                Destroy(gameObject);
+                yield break;
             }
 
         }
