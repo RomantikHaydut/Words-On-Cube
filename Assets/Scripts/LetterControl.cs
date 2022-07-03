@@ -10,7 +10,7 @@ public class LetterControl : MonoBehaviour
     Vector3 goalPoint;
     Vector3 direction;
     TextMeshProUGUI letterText;
-    
+        
     void Start()
     {
         selected = false;
@@ -18,10 +18,10 @@ public class LetterControl : MonoBehaviour
         GameObject[] tagSiblings= GameObject.FindGameObjectsWithTag(gameObject.tag);
         for (int i = 0; i < tagSiblings.Length; i++)
         {
-            if (tagSiblings[i].gameObject!=gameObject)
+            if (tagSiblings[i].gameObject.GetComponent<CanvasRenderer>() && tagSiblings[i].gameObject!=gameObject)
             {
                 letterText = tagSiblings[i].GetComponent<TextMeshProUGUI>();
-
+                tagSiblings[i].gameObject.SetActive(false);
             }
         }
     }
@@ -34,8 +34,6 @@ public class LetterControl : MonoBehaviour
             // here move the letter which is selected
             StartCoroutine(SelectLetter());
             selected = true;
-
-
         }
     }
 
@@ -88,7 +86,7 @@ public class LetterControl : MonoBehaviour
             }
             else if (timer<-1f)
             {
-                //letterText.CrossFadeColor(Color.red, 1f, true, true);
+                letterText.gameObject.SetActive(true);
                 letterText.color = Color.red;
                 Destroy(gameObject);
                 yield break;
