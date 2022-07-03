@@ -25,7 +25,6 @@ public class CubeController : MonoBehaviour
             // Here we get the first mouse position.
             rotateWay = Vector3.zero;
             firstMousePos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-            Debug.Log("First Pos : "+firstMousePos);
 
         }
         else if (Input.GetMouseButton(0))
@@ -41,15 +40,9 @@ public class CubeController : MonoBehaviour
             else if (Mathf.Abs(activeMousePos.y - firstMousePos.y) > Mathf.Abs(activeMousePos.x - firstMousePos.x))
             {
                  rotateWay = new Vector3(firstMousePos.y - activeMousePos.y,0 , 0);
-                transform.Rotate(-rotateWay * 270f * Time.deltaTime,Space.World);
+                transform.Rotate(-rotateWay * 360f * Time.deltaTime,Space.World);
             }
             
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            // Here we get the first mouse position again
-          //  firstMousePos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-            Debug.Log("activepos : "+activeMousePos);
         }
     }
 }
