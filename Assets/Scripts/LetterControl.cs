@@ -10,29 +10,24 @@ public class LetterControl : MonoBehaviour
     Vector3 goalPoint;
     Vector3 direction;
     TextMeshProUGUI letterText;
+    public int letterIndex;
+    public static int correctLetterIndex;
+    private int level;
         
     void Start()
     {
-        selected = false;
-        goalPoint = new Vector3(0, 3, -2);
-        GameObject[] tagSiblings= GameObject.FindGameObjectsWithTag(gameObject.tag);
-        for (int i = 0; i < tagSiblings.Length; i++)
-        {
-            if (tagSiblings[i].gameObject.GetComponent<CanvasRenderer>() && tagSiblings[i].gameObject!=gameObject)
-            {
-                letterText = tagSiblings[i].GetComponent<TextMeshProUGUI>();
-                tagSiblings[i].gameObject.SetActive(false);
-            }
-        }
+        EventInStart();
+        SortLetters();
     }
 
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&& triggiring && !selected)
+        if (Input.GetKeyDown(KeyCode.Space)&& triggiring && !selected && correctLetterIndex==letterIndex)
         {
             // here move the letter which is selected
             StartCoroutine(SelectLetter());
+            correctLetterIndex++;
             selected = true;
         }
     }
@@ -92,6 +87,44 @@ public class LetterControl : MonoBehaviour
                 yield break;
             }
 
+        }
+    }
+
+
+    void EventInStart()
+    {
+        selected = false;
+        goalPoint = new Vector3(0, 3, -2);
+        GameObject[] tagSiblings = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        for (int i = 0; i < tagSiblings.Length; i++)
+        {
+            if (tagSiblings[i].gameObject.GetComponent<CanvasRenderer>() && tagSiblings[i].gameObject != gameObject)
+            {
+                letterText = tagSiblings[i].GetComponent<TextMeshProUGUI>();
+                tagSiblings[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    void SortLetters()
+    {
+        level = GameManager.level;
+        correctLetterIndex = 1;
+        if (level==1 && gameObject.CompareTag("H"))
+        {
+            letterIndex = 1;
+        }
+        else if (level == 1 && gameObject.CompareTag("E"))
+        {
+            letterIndex = 2;
+        }
+        else if (level == 1 && gameObject.CompareTag("R"))
+        {
+            letterIndex = 3;
+        }
+        else if (level == 1 && gameObject.CompareTag("O"))
+        {
+            letterIndex = 4;
         }
     }
 }
