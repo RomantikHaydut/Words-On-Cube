@@ -7,12 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public static int level;
+
     private void Awake()
     {
         // Here we make this class singleton.
         if (Instance == null)
         {
             Instance = this;
+            level = 1;
         }
         else
         {
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
+            level++;
             NextLevel();
         }
     }
