@@ -9,10 +9,12 @@ TagManager:
   - E
   - R
   - O
-  - Text_H
-  - Text_E
-  - Text_R
-  - Text_O
+  - N
+  - M
+  - Y
+  - Changed Tag
+  - G
+  - A
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
 
     public static int level;
 
+    public static int score;
+
+    public static bool isGameContinue;
+
+    public static bool canGoNextLevel;
+
     private void Awake()
     {
         // Here we make this class singleton.
@@ -16,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             level = 1;
+            score = 0;
         }
         else
         {
@@ -40,5 +47,10 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void AddScore(int addingScore)
+    {
+        score += addingScore*(int)FindObjectOfType<CanvasManager>().time/60;
     }
 }
