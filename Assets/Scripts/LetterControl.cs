@@ -173,6 +173,38 @@ public class LetterControl : MonoBehaviour
                 canvasManager.EventInStart();
             }
         }
+        else if (level == 3)
+        {
+            if (gameObject.CompareTag("C"))
+            {
+                letterIndex = 1;
+            }
+            else if (gameObject.CompareTag("H"))
+            {
+                letterIndex = 2;
+            }
+            else if (gameObject.CompareTag("A"))
+            {
+                letterIndex = 3;
+
+            }
+            else if (gameObject.CompareTag("N"))
+            {
+                letterIndex = 4;
+
+            }
+            else if (gameObject.CompareTag("G"))
+            {
+                letterIndex = 5;
+
+            }
+            else if (gameObject.CompareTag("E"))
+            {
+                letterIndex = 6;
+                lastLetterIndex = 6;
+                canvasManager.EventInStart();
+            }
+        }
     }
 
     /*  void EventsInSameLetters(int wantedIndex)
